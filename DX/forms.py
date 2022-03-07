@@ -1,5 +1,3 @@
-from tkinter import HIDDEN
-from xml.dom.minidom import Attr
 from django.forms import DateTimeField, DateTimeInput, ModelForm, widgets
 from .models import *
 from django import forms
