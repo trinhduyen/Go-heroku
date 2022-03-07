@@ -1,0 +1,56 @@
+.container {
+    padding-top: 20px;
+}
+
+.row-header {
+    color: whitesmoke;
+}
+
+.container .main {
+    padding-top: 20px;
+}
+
+
+h4 {
+    color: black;
+    text-align:center
+}
+
+.color_span{
+    text-align:center
+}
+.export,.print{
+    float: left;
+}
+#nav-header{
+    background-color: #417690;
+   
+   
+}
+
+.hd{
+    padding-top: 50px;
+}
+.card-header{
+
+    text-align :center;
+  
+}
+table th {
+    font-size: small;
+}
+.card-body{
+    padding-top: 20px;
+}
+.logo {
+    width: 80px;
+   
+}
+
+.logo img {
+    width: 60%;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaa7, -8px -8px 15px #fff
+}
