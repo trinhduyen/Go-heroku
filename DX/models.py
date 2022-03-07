@@ -3,8 +3,6 @@ from django.db import models
 import uuid
 from django.db.models.deletion import CASCADE
 
-
-
 class groupmaterial(models.Model):
     NameNVT = models.CharField(max_length=255, unique=True,verbose_name='Tên Nhóm Vật Tư')
     class Meta:
