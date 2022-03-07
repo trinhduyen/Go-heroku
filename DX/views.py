@@ -1,10 +1,8 @@
 from datetime import date
 import datetime
 import io
-from re import template
 from urllib import request, response
 from django.shortcuts import render
-from django.core.serializers import serialize
 from .forms import *
 from django.views.generic  import TemplateView
 from django.views.generic.list import ListView
