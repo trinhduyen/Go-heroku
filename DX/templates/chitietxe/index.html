@@ -1,0 +1,109 @@
+{% extends 'base_test.html' %}
+<div class="container">
+    {% block content %}
+
+    <div class="row hd">
+        
+        <div class="col-md-1"></div>
+      <div class="col-md-10  ">
+          <div class="card-primary">
+              <div class="card-header">
+                {% if test %}
+                Thông Tin Xe Chưa Hoàn Thành
+                {% endif %} 
+
+            
+                    {% if onday %}
+                    Thông Tin Xe Vào Hôm Nay
+                    {% endif %} 
+              
+                {% if  vao %}
+                Thông Tin Xe Đã Hoàn Thành{% endif %}
+             
+                 
+               
+                </div>
+              <div class="card-body">
+                {% if XV is not None %}
+                <div  style="overflow-x: auto;">
+                <table class='table table-striped'>
+                    <th> Số Phiếu </th>
+                    <th> Biển Số Xe</th>
+                    <th> Nhân Viên Phụ Trách </th>
+                    <th>  Thời Gian Xe Vào </th>
+                    <th> Thời Gian Xe Ra </th>
+                    <th> Tình Trạng Xe Vào </th>
+                    <th> Nội Dung Công Việc </th>
+                    {% for item in XV  %}
+                    <tr>
+                        <td><a href="{% url 'showXeRa' item.id %}" style="text-decoration: none; color:#417690;">{{item.sophieu}}</a></td>
+                        <td>{{item.BienSoXe}}</td>
+                        <td>{{item.NhanVienPT}}</td>
+                        <td>{{item.datetimeXevao|date:"d-m-Y "}}</td>
+                        <td>{{item.datetimeXera|date:"d-m-Y "}}</td>
+                        <td>
+                            <p>
+                                <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="color: #417690">
+                                  Xem 
+                                </a>
+                              
+                              </p>
+                              <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    {{item.LyDoXeVao}}
+                                </div>
+                              </div>
+                            
+                            
+                            </td>
+                        <td>
+                            <p>
+                                <a  data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="color: #417690">
+                                 Xem
+                                </a>
+                              
+                              </p>
+                              <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    {{item.Lydo}}
+                                </div>
+                              </div>
+                            
+                        
+                        </td>
+                       
+
+                    </tr>   
+                {% endfor%}
+                </table>
+            </div>
+                {% endif %}
+              </div>
+          </div>
+              
+      </div>
+    </div>  
+    <div class='row'>
+        <div class="col-md-8"></div>
+        <div class='col-md-4'>
+            <span>
+                {% if page_obj.has_previous%}
+                    <a href="?page=1">&laquo;first</a>
+                    <a href="?page={{page_obj.previous_page_number}}">Pre</a>
+                {% endif %}
+                <span class='current'>
+                   page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                </span>
+                {% if page_obj.has_next%}
+                    <a href="?page={{page_obj.next_page_number}}">next</a>
+                    <a href="?page={{page_obj.paginator.num_pages}}">last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+</div>
+
+    {% endblock content %}
+
+</div>

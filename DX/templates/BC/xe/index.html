@@ -1,0 +1,33 @@
+{% extends 'base_test.html' %}
+<div class="container">
+    {% block content %}
+   
+      <div class="card-=">
+       <div class="card-header">
+        <nav >
+          <ul class="nnav justify-content-center">
+
+            <li class="nav-item d-none d-sm-inline-block">
+              <a href="{% url 'chiphitheoxe' %}" class="nav-link">Chi phí vật tư theo xe</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+              <a href="{% url 'LSvattu' %}" class="nav-link">Lịch sử cấp phát vật tư</a>
+            </li>
+          </ul>
+       </nav>
+       </div>
+        
+     
+        <div class="card-body">
+            {% block conten1 %}{% endblock conten1 %}
+        </div>
+      </div>
+        {% block content2 %}
+  
+        {% endblock content2 %}
+        {% endblock content %}
+     
+   
+     
+   
+</div>           

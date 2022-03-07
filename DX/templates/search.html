@@ -1,0 +1,13 @@
+
+  {% if data %}
+    Tên phương tiện:
+    <select class="form-control" aria-label="Default select example" name="tenpt" id ="test1">
+      <option value="all" selected>all</option>
+      {% for item in data  %}
+      <option value="{{item.id}}">{{item.TenXe}}</option>
+      {% endfor %}
+      
+    </select>
+ 
+    {% endif %}
+  

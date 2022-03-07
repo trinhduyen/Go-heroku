@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quan Ly Xe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+   <script src = "{% static 'js/bootstrap.bundle.min.js' %}" crossorigin="anonymous" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
+   <script src = "{% static 'js/jquery-3.6.0.min.js' %}" ></script>
+   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+   <link rel="stylesheet" href="{% static 'css/layout/order.css' %}">
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+   <link rel="stylesheet" href="{% static 'css/layout/layout.css' %}"> 
+   
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-pink"  id="nav-header">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Đội Xe</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Vật Tư
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'List_VT' %}">Xem Vật Tư</a></li>
+               
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Nhóm Vật Tư
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'List_NVT' %}">Xem Nhóm Vật Tư</a></li>
+              
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Nhóm Thiết Bị
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'List_NTB' %}">Xem Nhóm Thiết Bị</a></li>
+            
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Thiết Bị
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'List_TB' %}">Xem Thiết Bị</a></li>
+             
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Đơn Vị Vật Tư
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'List_DV' %}">Xem Đơn Vị</a></li>
+                
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Nhân Viên
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'List_NV' %}">Xem Nhân Viên</a></li>
+         
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Xe
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'list_Xe' %}">Thông Tin Xe</a></li>
+            
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Quản Lý Xe 
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               
+                  <li><a class="dropdown-item" href="{% url 'List_Xe' %}">Xe Đã Ra</a></li>
+                  <li><a class="dropdown-item" href="{% url 'List_Xe2' %}">Xe Vào Chưa Ra</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Báo Cáo 
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               
+                  <li><a class="dropdown-item" href="{% url 'bcindex' %}">báo cáo</a></li>
+                  <li><a class="dropdown-item" href="{% url 'bcxe' %}">Báo Cáo Xe</a></li>
+          
+                </ul>
+              </li>
+
+            </ul>
+           
+            
+            </form>
+          </div>
+        </div>
+      </nav>
+  
+{% block header  %}
+{% endblock header %}   
+{% block content  %}
+
+{% endblock content %}   
+{% block footer %}
+
+<script src = "{% static 'js/main.js' %}"></script>
+
+{% endblock footer %}
+
+</body>
+</html>

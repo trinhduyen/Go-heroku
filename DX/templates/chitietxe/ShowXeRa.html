@@ -1,0 +1,118 @@
+{% extends 'base_test.html' %}
+{% load humanize %}
+{% load l10n %}
+<div class="container">
+    {% block content %}
+    
+   
+
+  <div class="row">
+    <div class='col-md-2'>  
+       
+      
+    </div>
+
+   
+      <div class="col-md-9"></div>
+      <div class="col-md-1">  
+        {% for item in xe  %}
+        <a href=" {% url 'ViewPDF' item.id  %}">Dowload</a>
+        {% endfor %}
+         </div>
+  </div>
+
+   
+    <div class="row hd">
+ 
+
+        <div class="col-md-1"></div>
+
+      <div class="col-md-10  ">
+        <div class="row">
+            <div class="col-md-5">
+              <div class="logo"> <img src="/static/img/vinceza.png" alt=""> </div>
+              <div style='border-bottom: 1px dashed #777;
+              text-decoration: none; '>
+           
+                   Ngày:&nbsp;{{date|date:"d-m-Y "}}
+                 <br>
+                  <label for="" id ='splb'>Số Phiếu:  
+                    {% for item in xe  %}
+                    {{item.sophieu}}<br>
+                    {% endfor %}</label> 
+            </div>
+          
+          <br>
+          </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5" style=''> 
+                 Biển Số Xe:  
+                 {% for item in xe  %}
+                 {{item.BienSoXe}}<br>
+                  {% endfor %}
+                  Nhân Viên Phụ Trách:
+                  {% for item in xe  %}
+                  {{item.NhanVienPT}}<br>
+                   {% endfor %}
+                   Thời Gian Xe Vào:
+                   {% for item in xe  %}
+                   {{item.datetimeXevao|date:"d-m-Y "}}<br>
+                    {% endfor %}
+                </div>
+            
+        </div>
+          <div class="card">
+
+              <div class="card-header">   
+                <h7> Bảng Tổng Hợp Chi Tiết Vật Tư</h7><br>
+               
+              
+            
+
+              </div>
+              <div class="card-body">
+                {% if XR is not None %}
+                <div  style="overflow-x: auto;">
+                <table class='table table-striped'>
+                   
+                    <th> Vật Tư </th>
+                    <th> Kho </th>
+                    <th> Xuất Vật Tư </th>
+                    <th> Thời Gian Xuất VT </th>
+                    <th>Đơn Vị</th>
+                    <th> Số Lượng </th>
+                    <th>  Đơn Giá </th>
+                    <th> Thành Tiền </th>
+
+                    {% for item in XR  %}
+                    <tr>
+                    
+                        <td>{{item.NameVT}}</td>
+                        <td>{{item.TrangThaiKho}}</td>
+                        <td>{{item.TrangThaiXuat}}</td>
+                        <td>{{item.DatetimeXuat|date:"d-m-Y "}}</td>
+                        <td>{{item.NameDv}}</td>
+                        <td>{{item.SoLuong}}</td>
+                        <td>{{item.dongia|stringformat:".3f"|intcomma}}</td>
+                        <td>{{item.thanhtien|stringformat:".3f"|intcomma}}</td>
+                       
+
+                    </tr>   
+                   
+                {% endfor%}
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td><b>ToTal:<b></td><td> {{sum|stringformat:".3f"|intcomma}}</td></tr>                                                                                                                                                                                                                       
+                </table>
+            </div>
+                {% endif %}
+              </div>
+          </div>
+         
+              
+      </div>
+    </div>  
+   
+</div>
+</div>
+    {% endblock content %}
+
+</div>

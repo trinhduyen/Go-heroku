@@ -1,0 +1,86 @@
+{% load humanize %}
+{% load l10n %}
+<div class="row">
+  
+  <div class="col-md-3">
+    <div class="card card-success">
+      <div class="card-header">
+        <h5 class="card-title">{{item.Tennhomxe}}</h5>
+      </div>
+        <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+    </div>
+      <!-- /.card-body -->
+  </div>
+
+  <div class="col-md-8">
+    <div class="card-info">
+      <div class="card-header">
+        Chi phí theo tháng
+      </div>
+      <div class="card-body">
+        <div  style="overflow-x: auto;">
+        <table class='table'>
+          <thead>       
+            <th scope="row">Chủng loại</th>  
+            <th scope="col">Chi phí</th>
+                           
+           
+          </thead>
+          {% for item in vtdata %}
+          <tr>
+            <td>{{item.Tennhomxe}}</td>
+            <td>{{item.id|stringformat:".3f"|intcomma}}</td>
+               
+          </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+    
+
+</section>    
+
+
+
+
+<script>
+  $(function () {
+    var donutData        = {
+      labels: [{% for data in vtdata %}'{{ data.Tennhomxe }}',  {% endfor %} ],
+      datasets: [
+        {
+          data: [{% for data in vtdata %}'{{ data.id }}' ,{% endfor %} ],
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        }
+      ]
+    }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+  
+
+  var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+  var pieData        = donutData;
+  var pieOptions     = {
+    maintainAspectRatio : false,
+    responsive : true,
+  }
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+  new Chart(pieChartCanvas, {
+    type: 'pie',
+    data: pieData,
+    options: pieOptions
+  })
+  })
+
+  </script>

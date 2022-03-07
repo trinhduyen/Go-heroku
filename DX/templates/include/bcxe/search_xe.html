@@ -1,0 +1,7 @@
+Tên phương tiện:
+<select class="form-control">
+  <option value='all' selected>All</option>
+  {% for item in tenpt %}
+  <option value= "{{item.id}}" >{{item.TenXe}}</option>
+  {% endfor %}
+</select>

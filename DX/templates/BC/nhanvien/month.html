@@ -1,0 +1,45 @@
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="card-primary">
+            <div class="card-header">
+                  Danh sách nhân viên bảo dưỡng trong năm 
+            </div>
+            <div class="card-body">
+            </div>        
+                <div  style="overflow-x: auto;">
+                    <table class='table table-striped'>
+                        <thead>
+                            <th>Mã nhân viên</th>
+                            <th>Tên nhân viên</th>
+                            <th>Số xe bảo dưỡng</th>
+                        </thead>
+                        <tbody>
+                            {% for item in ac  %}
+                            <tr>
+                                {% if pk %}
+                                <td><a href="{% url 'searchVTNV' pk %}" hx-target="#chiphiVTNV" hx-get="{% url 'searchVTNV' pk %}" >{{item.MaNV}}</a></td>
+                                {% else %}
+                                <td><a href="#">{{item.MaNV}}</a></td>
+                                {% endif %}
+                                <td>{{item.TenNV}}</td>
+                                <td>{{item.id}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                       
+
+                    </table>
+                </div>
+            </div>
+        </div>
+  
+
+
+
+        
+
+
+   
+      
+      

@@ -1,0 +1,75 @@
+{% load humanize %}
+{% load l10n %}
+<div class="col-md-8">
+    <div class="card-body">
+      {% for item in loaipt %}
+      <div class="card-yellow">
+      
+        <div class="card-header" >
+         Chi phí vật tư nhóm  <b>{{item.Tennhomxe}}</b> 
+        </div>
+        <div class="card-body">
+          <div  style="overflow-x: auto;">
+            <table class='table table-striped'>
+              <thead>
+                <th>Tên xe</th>
+                <th>Biển số xe</th>
+                <th>Chi phí</th>
+              </thead>
+              <tbody>
+              {% for item1 in  cp %}
+              {% if item.id == item1.id %}
+            
+                <tr>
+                  <td>{{item1.TenXe}}</td>
+                  <td>{{item1.BienSoXe}}</td>
+                  <td>{{item1.sum|stringformat:".3f"|intcomma}}</td>
+                  </tr>
+             
+
+              {% endif %}
+            {% endfor %}
+          </tbody>
+            </table>
+          
+            
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card-body">
+      <div class="card-green">
+        <div class="card-header"> Chi phí tổng</div>
+        <div class="card-body">
+    
+          <div  style="overflow-x: auto;">
+            <table class='table table-striped'>
+              <thead>
+                <th>Tên chủng loại</th>
+                <th>Chi phí</th>
+              </thead>
+              
+             
+              <tbody>
+                {% for item2 in  cpt %}
+                <tr>
+                  <td>{{item2.Tennhomxe}}</td>
+                  <td>{{item2.sum|stringformat:".3f"|intcomma}}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+
+            </table>
+          
+            
+          </div>
+  
+        </div>
+      </div>
+    </div>
+    
+  </div>

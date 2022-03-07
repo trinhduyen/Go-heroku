@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+   
+            <style>
+                @page {
+                    size: a4 portrait;
+                    @frame header_frame {         
+                        -pdf-frame-content: header_content;
+                        left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+                    }
+                    @frame content_frame {         
+                        left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+                    }
+                    @frame footer_frame {          
+                        -pdf-frame-content: footer_content;
+                        left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+                    }
+                }
+            </style>
+         
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        {% load humanize %}
+        {% load l10n %}
+        <script src="" async defer></script>
+            <div id="header_content" style="text-align:center">
+                <h3>Cong Ty CP Dau Tu Va Phat Triên ViCenZa </h3>
+                <div class="time" style="font:italic" >Ngày  {{date|date:"d"}} Tháng  {{date|date:"m"}} Nam  {{date|date:"Y"}}</div>  
+            </div><br><br>
+     
+            <table>
+                <tr>
+                    <td>
+                        <b>So Phieu :</b>
+                       {% for item in dt  %}
+                       {{item.sophieu}}<br>
+                       {% endfor %}
+                    Thoi Gian:
+                    {% for item in dt  %}
+                    {{item.datetimeXevao|date:"d-m-Y"}}
+                    {% endfor %}
+                    </td>
+                    <td></td>
+                    <td>   Biên Sô Xe:
+                        {% for item in dt  %}
+                        {{item.BienSoXe}}<br>
+                        {% endfor %}
+                        Nhân Viên PT : 
+                        {% for item in dt  %}
+                        {{item.NhanVienPT}}<br>
+                        {% endfor %}</td>
+                </tr>
+            </table>
+             
+     
+                   
+           <br><br>
+            <div style="text-align:center"><h7 > Bang Tong Hop Chi Tiet Vat Tu</h7><br><br></div>  
+         <table>
+             <th>
+                 Vat Tu
+             </th>
+             <th>Ngay Xuat</th>
+             <th>So Luong</th>
+             <th>Don Gia</th>
+             <th>Thanh Tien</th>
+             {% for item in data  %}
+             <tr style="text-align:center">
+                 {% for item2  in  vt %}
+                 {% if item2.id == item.VtSudung_id   %}
+                 <td>
+                     {{item2.NameVT}}
+                 </td>
+                 {% endif %}
+                 {% endfor %}
+        
+                 <td>
+                     {{item.DatetimeXuat|date:"m-d-Y"}}
+                 </td>
+           
+        
+                 <td>
+                     {{item.SoLuong}}
+                 </td>
+          
+         
+                 <td>
+                     {{item.dongia|stringformat:".3f"|intcomma}}
+                 </td>
+           
+         
+             <td>
+                 {{item.thanhtien|stringformat:".3f"|intcomma}}
+             </td>
+            </tr>
+            {% endfor %}
+            <hr>
+           
+             
+         </table>
+           <hr>
+           Tong : {{sum|stringformat:".3f"|intcomma}}<br><br><br><br><br>
+          
+           <table>
+               <tr>
+                   <td>Nguoi lam don<br>
+                    <div style='font: italic'>ky,ho ten</div>
+                </td>
+                <td></td>
+                <td>Thu Kho<br>
+                    <div style='font: italic'>ky,ho ten</div>
+                </td>
+                <td></td>
+                <td>Nguoi Nhan<br>
+                    <div style='font: italic'>ky,ho ten</div>
+                </td>
+               </tr>
+           </table>
+          
+            
+          
+            <!-- Content for Static Frame 'footer_frame' -->
+            <div id="footer_content">(c) - page <pdf:pagenumber>
+                of <pdf:pagecount>
+            </div>
+
+
+        
+       
+       
+    </body>
+</html>

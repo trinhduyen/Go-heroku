@@ -1,0 +1,56 @@
+{% extends 'BC/xe/index.html' %}
+{% block content2 %}
+
+
+<div class="card">
+    <div class="card-header">
+        <form >
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-3">
+                Ngày đầu:<input type="date" class="form-control" name="start_date">
+              </div>
+              <div class="col-md-3">
+                Ngày cuối:<input type="date" class="form-control" name ="end_date">
+              </div>
+            
+              <div class="col-md-3">
+                Loại phương tiện:
+                <select class="form-control" aria-label="Default select example" name ="loaipt" hx-post="/abc/"  hx-trigger="change" hx-target="#test" >
+                  <option value="all" selected>all</option>
+                  {% for item in loaipt  %}
+                  <option value="{{item.id}}">{{item.Tennhomxe}}</option>
+                  {% endfor %}
+                  
+                </select>
+        
+              </div>
+              <div class ='col-md-3' id="test">
+        
+              {% include 'search.html' %}
+                           
+              </div>
+            </div><br>
+           <div class = "row">
+            <div class ="col-md-2">
+            </div>
+            <div class ="col-md-2">
+            </div>
+            <div class ="col-md-3">
+        
+             <input type="text" class="form-control" name ="BienSoXe" placeholder="Nhập biển số xe">
+        
+            </div>
+            <div class ="col-md-1">
+              <button class='btn btn-outline-success' hx-target="#body_htmlx" hx-post='{% url 'search' %}' type='submit' > search</button>
+            </div>
+           
+           </div>
+          </form>
+    </div>
+</div>
+<div class="card-body" id ='body_htmlx'>
+    {% include 'include/search_body.html' %}
+</div>
+
+ {% endblock content2 %}

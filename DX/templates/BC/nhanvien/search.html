@@ -1,0 +1,30 @@
+{% extends 'base_test.html' %}
+{% block content %}
+<nav>
+    <form action="">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-2"> <input type="text" class='form-control' placeholder='Nhập tháng' name='thang'></div>
+            <div class="col-md-2">
+                <button type='submit' class='btn btn-outline-success' hx-target="#search_nhanvien" hx-post='{% url 'searchNV' %}' type='submit' id ='p' >Tìm kiếm</button>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-1"></div>
+        </div>
+       
+    </form>
+</nav><br>
+<div class="row" id ='search_nhanvien'>
+{% include  "BC/nhanvien/month.html" %}
+</div>
+
+<div class="row" id="chiphiVTNV">
+{% include 'bc/nhanvien/chiphiVT.html' %}
+</div>
+
+<script>
+  
+</script>
+
+{% endblock content %}

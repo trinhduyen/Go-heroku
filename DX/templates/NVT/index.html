@@ -1,0 +1,55 @@
+{% extends 'base_test.html' %}
+<div class="container">
+    {% block content %}
+
+    <div class="row hd">
+        
+        <div class="col-md-2"></div>
+      <div class="col-md-8 .offset-md-3">
+          <div class="card-primary">
+              <div class="card-header">Thông Tin Nhóm Vật Tư</div>
+              <div class="card-body">
+                {% if NVT is not None %}
+                <div  style="overflow-x: auto;">
+                <table class='table table-striped'>
+                    <th> Id </th>
+                    <th> Tên Nhóm Vật Tư </th>
+                    {% for item in NVT  %}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.NameNVT}}</td>
+                       
+
+                    </tr>   
+                {% endfor%}
+                </table>
+            </div>
+                {% endif %}
+              </div>
+          </div>
+              
+      </div>
+    </div>  
+    <div class='row'>
+        <div class="col-md-8"></div>
+        <div class='col-md-4'>
+            <span>
+                {% if page_obj.has_previous%}
+                    <a href="?page=1">&laquo;first</a>
+                    <a href="?page={{page_obj.previous_page_number}}">Pre</a>
+                {% endif %}
+                <span class='current'>
+                   page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                </span>
+                {% if page_obj.has_next%}
+                    <a href="?page={{page_obj.next_page_number}}">next</a>
+                    <a href="?page={{page_obj.paginator.num_pages}}">last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+</div>
+    {% endblock content %}
+
+</div>

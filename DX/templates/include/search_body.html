@@ -1,0 +1,80 @@
+{% load humanize %}
+{% load l10n %}
+<div class="card" >
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+      <div class = "table-responsive">
+        {% if vattu %}
+        <table class= 'table'>
+          <th>Biển số xe</th>
+          <th>Nhóm vật tư</th>
+          <th>Tên vật tư</th>
+          <th>Đơn vị</th>
+          <th>Ngày cấp</th>
+          <th>Số lượng</th>
+          <th>Đơn giá</th>
+          <th>Thành tiền</th>
+          {% for item in vattu  %}
+          <tr>
+            <td>{{item.BienSoXe}}</td>
+            <td>{{item.NameNVT}}</td>
+            <td>{{item.NameVT}}</td>
+            <td>{{item.NameDv}}</td>
+            <td>{{item.DatetimeXuat|date:"d-m-Y"}}</td>
+            <td>{{item.SoLuong}}</td>
+            <td>{{item.dongia|stringformat:".3f"|intcomma}}</td>
+            <td>{{item.thanhtien|stringformat:".3f"|intcomma}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% endif %}
+        {% if vattut %}
+        <table class= 'table'>
+          <th>Biển số xe</th>
+          <th>Nhóm vật tư</th>
+          <th>Tên vật tư</th>
+          <th>Đơn vị</th>
+          <th>Ngày cấp</th>
+          <th>Số lượng</th>
+          <th>Đơn giá</th>
+          <th>Thành tiền</th>
+          {% for item in vattut  %}
+          <tr>
+            <td>{{item.BienSoXe}}</td>
+            <td>{{item.NameNVT}}</td>
+            <td>{{item.NameVT}}</td>
+            <td>{{item.NameDv}}</td>
+            <td>{{item.DatetimeXuat|date:"d-m-Y"}}</td>
+            <td>{{item.SoLuong}}</td>
+            <td>{{item.dongia|stringformat:".3f"|intcomma}}</td>
+            <td>{{item.thanhtien|stringformat:".3f"|intcomma}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+  {% if vattu %}
+  <div class='row'>
+    <div class="col-md-8"></div>
+    <div class='col-md-4'>
+        <span>
+            {% if page_obj.has_previous%}
+                <a href="?page=1">&laquo;first</a>
+                <a href="?page={{page_obj.previous_page_number}}">Pre</a>
+            {% endif %}
+            <span class='current'>
+               {{page_obj.number}} 
+            </span>
+            {% if page_obj.has_next%}
+                <a href="?page={{page_obj.next_page_number}}">next</a>
+                <a href="?page={{page_obj.paginator.num_pages}}">last</a>
+            {% endif %}
+        </span>
+    </div>
+</div> 
+{% endif %}

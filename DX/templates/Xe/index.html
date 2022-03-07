@@ -1,0 +1,61 @@
+{% extends 'base_test.html' %}
+<div class="container">
+    {% block content %}
+
+    <div class="row hd">
+        
+        <div class="col-md-2"></div>
+      <div class="col-md-8">
+          <div class="card-primary">
+              <div class="card-header">Thông Tin Xe</div>
+              <div class="card-body">
+                {% if Xe is not None %}
+                <div  style="overflow-x: auto;">
+                <table class='table table-striped'>
+                   
+                    <th> Biển số xe </th>
+                    <th> Tên xe </th>
+                    <th> Chủng loại xe </th>
+                    
+                    {% for item in Xe  %}
+                    <tr>
+                        
+                        <td>{{item.BienSoXe}}</td>
+                        <td>{{item.TenXe}}</td>
+                        <td>{{item.IDNhomXe}}</td>
+                      
+                       
+
+                    </tr>   
+                {% endfor%}
+                </table>
+            </div>
+                {% endif %}
+              </div>
+          </div>
+              
+      </div>
+    </div>  
+    <div class='row'>
+        <div class="col-md-8"></div>
+        <div class='col-md-4'>
+            <span>
+                {% if page_obj.has_previous%}
+                    <a href="?page=1">&laquo;first</a>
+                    <a href="?page={{page_obj.previous_page_number}}">Pre</a>
+                {% endif %}
+                <span class='current'>
+                   page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                </span>
+                {% if page_obj.has_next%}
+                    <a href="?page={{page_obj.next_page_number}}">next</a>
+                    <a href="?page={{page_obj.paginator.num_pages}}">last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+</div>
+    {% endblock content %}
+
+</div>

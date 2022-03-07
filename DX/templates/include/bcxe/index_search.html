@@ -1,0 +1,24 @@
+<form action="">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <select  class="form-control">
+          <option  selected>Chọn tháng</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select  class="form-control" name ='nhomxevt'  hx-get="{% url 'searchxevt' %}" hx-trigger="change" hax-target ="#aa">
+          <option  selected>Chọn nhóm xe</option>
+          {% for item in loaipt %}
+          <option value= "{{item.id}}" >{{item.Tennhomxe}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2" id ="aa">
+       {% include "include/bcxe/search_xe.html" %}
+      </div>
+      <div class="col-md-2">
+        <button class='btn btn-outline-success'>search</button>
+      </div>
+    </div>
+  </form>

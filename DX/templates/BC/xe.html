@@ -1,0 +1,225 @@
+{% extends 'base_test.html' %}
+<div class="container">
+    {% block content %}
+   
+   
+      <div class="card">
+        <div class="card-header">
+         
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Chi phí vật tư theo nhóm xe </button>
+              <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-detail" type="button" role="tab" aria-controls="nav-detail" aria-selected="true">Chi phí vật tư theo xe </button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Lịch sử cấp phát vật tư</button>
+              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+            </div>
+          </nav>
+        </div>  
+        <div class="card-body">
+          <div class="tab-content" id="nav-tabContent" >
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <ul class="nav nav-pills mb-3 content-center" id="pills-tab" role="tablist">
+              
+                {% for item in  nhomxe %}
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link " id="pills-home-{{item.id}}" data-bs-toggle="pill" data-bs-target="#pills-{{item.id}}" type="button" role="tab" aria-controls="pills-{{item.id}}" aria-selected="true">{{item.Tennhomxe}}</a>
+                  </li>
+                {% endfor %}
+              </ul> 
+              <div class="tab-content" id="pills-tabContent">
+                {% for item in nhomxe  %}
+                <div class="tab-pane fade" id="pills-{{item.id}}" role="tabpanel" aria-labelledby="pills-home-{{item.id}}">  
+                 
+          
+
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="card card-success">
+                        <div class="card-header">
+                          <h5 class="card-title">{{item.Tennhomxe}}</h5>
+                        </div>
+                          <canvas id="donutChart-{{item.id}}" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                      </div>
+                        <!-- /.card-body -->
+                   
+                  </div>
+                    <div class="col-md-9">
+                      <div class="card-info">
+                        <div class="card-header">
+                          Chi phí theo tháng
+                        </div>
+                        <div class="card-body">
+                          <div  style="overflow-x: auto;">
+                          <table class='table'>
+                            <thead>
+
+                              <tr>
+                                <th scope="col">Tháng</th>
+                                {% for data in bcxe  %}
+                                {% if data.idnhomxe == item.id %}
+                                <th scope="col">{{data.month}}</th>
+                                {% endif %}
+                               
+                                {% endfor %}
+                              </tr>
+                            </thead>
+                            
+                            <tr><th scope="row">Chi phí</th>
+                              {% for data in bcxe  %}
+                                {% if data.idnhomxe == item.id %}
+
+                                  <td>{{data.id}}</td>
+                                 
+                                {% endif %}
+                               
+                              {% endfor %}
+                            </tr>
+                            
+                          </table>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                     
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                      
+                          <div class="card-yellow">
+                          <div class="card-header">
+                            Chi phí nhóm vật tư theo tháng
+                          </div>
+                          <div class="card-body">
+                          
+                          </div>
+                        </div>
+                      </div>
+             
+
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <form >
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-3">
+                    Ngày đầu:<input type="date" class="form-control" name="start_date">
+                  </div>
+                  <div class="col-md-3">
+                    Ngày cuối:<input type="date" class="form-control" name ="end_date">
+                  </div>
+                
+                  <div class="col-md-3">
+                    Loại phương tiện:
+                    <select class="form-control" aria-label="Default select example" name ="loaipt" hx-post="/abc/"  hx-trigger="change" hx-target="#test" >
+                      <option value="all" selected>all</option>
+                      {% for item in loaipt  %}
+                      <option value="{{item.id}}">{{item.Tennhomxe}}</option>
+                      {% endfor %}
+                      
+                    </select>
+
+                  </div>
+                  <div class ='col-md-3' id="test">
+
+                  {% include 'search.html' %}
+                               
+                  </div>
+                </div><br>
+               <div class = "row">
+                <div class ="col-md-2">
+                </div>
+                <div class ="col-md-2">
+                </div>
+                <div class ="col-md-3">
+
+                 <input type="text" class="form-control" name ="BienSoXe" placeholder="Nhập biển số xe">
+
+                </div>
+                <div class ="col-md-1">
+                  <button class='btn btn-outline-success' hx-target="#body_htmlx" hx-post='{% url 'search' %}' type='submit' > search</button>
+                </div>
+               
+               </div>
+              </form>
+             {% include 'include/search_body.html' %}
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+            <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-contact-tab">
+              <form action="">
+                <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">
+                    <select  class="form-control">
+                      <option value='all'  selected>All</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-2">
+                    <select  class="form-control" name ="nhomxevt"  hx-get="{% url 'searchxevt' %}" hx-trigger="change" hx-target ="#aa">
+                      <option value='all'  selected>All</option>
+                      {% for item in loaipt %}
+                      <option value= "{{item.id}}" >{{item.Tennhomxe}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="col-md-2" id ="aa">
+                   {% include "include/bcxe/search_xe.html" %}
+                  </div>
+                  <div class="col-md-2">
+                    <button class='btn btn-outline-success'>search</button>
+                  </div>
+                </div>
+              </form>
+
+
+            </div>
+        </div>
+       
+      
+    
+<script>
+  $(function () {
+    var a = [];
+  {% for item in nhomxe %}
+    var donutChartCanvas_{{ item.id }} = $('#donutChart-{{ item.id }}').get(0).getContext('2d')
+   
+          var donutData_{{ item.id }}        = {
+            labels: [{% for data in bcxe %}{% if data.idnhomxe == item.id %}'{{ data.month }}', {% endif %}  {% endfor %} ],
+            
+            datasets: [
+              {
+                data:  [ {% for data in bcxe %}{% if data.idnhomxe == item.id %} '{{ data.id }}',  {% endif %}  {% endfor %}],
+                backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+              }
+            ]
+          }
+         
+  {% endfor %} 
+
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    {% for item in nhomxe %}
+    new Chart(donutChartCanvas_{{item.id}}, {
+      type: 'doughnut',
+      data: donutData_{{item.id}},
+      options: donutOptions
+    })
+    {% endfor %}
+  })
+
+
+  </script>
+
+  
+{% endblock %}
+</div>

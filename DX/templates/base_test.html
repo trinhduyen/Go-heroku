@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quản Lý Đội Xe</title>
+{% load static %}
+
+  <!-- Google Font: Source Sans Pro -->
+  
+  <!-- Font Awesome Icons -->
+  <!-- IonIcons -->
+ 
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'css/base/adminlte.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/layout/layout.css' %}"> 
+
+  <link rel="stylesheet" href="{% static 'css/layout/font-awesome.min.css' %}"  type='text/css'> 
+  <script src = "{% static 'js/base/htmlx.js' %}"></script>
+  <script src = "{% static 'js/base/chart.js' %}"></script>
+  
+  <script src = "{% static 'js/base/3.5.1.slim.js' %}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  <script src = "{% static 'js/jquery-3.6.0.min.js' %}" ></script>
+</head>
+<!--
+`body` tag options:
+
+  Apply one or more of the following classes to to the body tag
+  to get the desired effect
+
+  * sidebar-collapse
+  * sidebar-mini
+-->
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'base' %}" class="nav-link">Trang Chủ</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Liên Hệ</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+        
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+
+      <!-- Messages Dropdown Menu -->
+     
+      <!-- Notifications Dropdown Menu -->
+     
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style=' position:fixed;'>
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="{% static 'img/vinceza.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">ViCenZa</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+         
+         
+         
+            <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-car-alt"></i>
+             
+              <p>
+                 Xe
+                 <i class="right fas fa-angle-left"></i>
+                 <span class="right badge badge-danger">Xe</span>
+               
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=" {% url 'list_Xe' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thông Tin Xe</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'bcxe01' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Báo Cáo Xe
+                    <span class="right badge badge-danger">Xe</span>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'XeOnDay'  %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Xe Vào Trong Ngày
+                    {% for item in sm_box.two  %}
+                    <span class="badge badge-info right">                      
+                      {{item.id}}
+                    </span>
+                    {% endfor %}
+                  </p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+         
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+             Vật Tư
+                <i class="fas fa-angle-left right"></i>
+                <span class="right badge badge-danger">Vật Tư</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'List_VT' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Vật Tư</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'List_NVT' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nhóm Vật Tư</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/boxed.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Báo Cáo Vật Tư</p>
+                </a>
+              </li>
+             
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-user-circle" aria-hidden="true"></i>
+             
+              <p>
+                Nhân Viên
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'List_NV' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Nhân Viên</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'listnhanvien' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Báo Cáo Nhân Viên</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+         
+
+          <li class="nav-header">Quản Lý Xe Ra Vào</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                Danh Sách Xe
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'List_Xe2' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Xe Chưa Ra</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'List_Xe' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Xe hoàn Thành</p>
+                </a>
+              </li>
+             
+            </ul>
+         
+          <li class="nav-header">Danh Sách Khác</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                Thiết Bị
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Thiết Bị</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Nhóm Thiết Bị</p>
+                </a>
+              </li>
+              
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+               Đơn Vị Vật Tư
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'List_DV' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Đơn Vị</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+        </ul> 
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Đội Xe</h1>
+             
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+              <li class="breadcrumb-item active">Đội Xe</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+      {% block smallbox %}
+      {% endblock smallbox %}
+    <!-- /.content -->
+    {% block content  %}
+
+    {% endblock content %} 
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>ViCenZa &copy; 2022 <a href="http://vicenza.vn/">ViCenZa</a>.</strong>
+    023737 99999
+    
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+
+<script src="{% static 'js/jquery.min.js' %} "></script>
+<!-- Bootstrap -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE -->
+
+<script src="{% static 'js/base/adminlte.min.js' %} "></script>
+<!-- OPTIONAL SCRIPTS -->
+
+<!-- AdminLTE for demo purposes -->
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
+
+
+
+</body>
+</html>

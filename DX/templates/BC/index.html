@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load humanize %}
+<div class="container">
+    
+     <div class="row mt-3 pt-3">
+            <h6 style="text-align:center">Chi Phí Các Xe Tính Đến Thời Điểm Hiện Tại</h6><br><br>
+            <div class="col-md-1"></div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <table class='table'>
+                            <th>
+                                Biển Số Xe
+                            </th>
+                            <th>
+                                Tổng Chi Phí
+                            </th>
+            
+                            {% for data in bc.one %}
+                            <tr>
+                                <td>
+                                    {{data.BienSoXe}}
+                                </td>
+                                <td>
+                                    {{data.tt|floatformat:2|intcomma}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+            <div class="col-md-2">
+                <canvas id="myChart" width="15px" height="15px"></canvas>
+            </div>
+       </div> 
+
+    <br><br>
+
+    <div class="row">
+        
+        <div class="col-md-12">
+            
+                <div class="card">
+                    <div class="card-header"><h6>Danh Sách  Xe Vào Hôm Nay </h6></div>
+                            <div class="card-body"> 
+                                <div class="row">
+                                    {% for item in bc.two  %}
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    {{item.BienSoXe}}
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-title">
+                                                        Nhân Viên Phụ Trách :
+                                                        {{item.TenNV}}
+                                                    </div>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Tình Trạng Xe Vào:
+                                                        <em>{{item.LyDoXeVao}}</em>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Nội Dung Công Việc:
+                                                        <em>{{item.Lydo}}</em>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-6">
+
+                                        Danh Sách Vật Tư Sử Dụng<br><br>
+                                        <div  style="overflow-x: auto;">
+                                        <table class='table'>
+                                            <th>Tên Vật Tư</th>
+                                            <th>Số Lượng</th>
+                                            <th>Đơn Giá</th>
+                                            <th>Thành Tiền</th>
+                                            {% for it in bc.three %}
+                                        
+                                                {% if it.XeVao_id == item.id %}
+                                                    
+                                                            <tr>
+                                                                <td>{{it.NameVT}}</td>
+                                                                <td>{{it.SoLuong}}</td>
+                                                                <td>{{it.dongia}}</td>
+                                                                <td>{{it.thanhtien|floatformat|intcomma}}</td>
+                                                            </tr>
+                                        
+                                                                     
+                                                {% endif %}
+                                          
+                                            {% endfor %}
+                                        </table>
+                                        <div  style="overflow-x: auto;"> 
+                                    </div>
+                                    <br>
+                                  <hr>  <hr>
+                                    {% endfor %}           
+                                  
+        
+                            </div> 
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+ 
+</div>   
+
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'pie',
+    data: { 
+        labels: [{% for data in bc.one %} '{{ data.BienSoXe }}', {% endfor %}],
+        datasets: [{
+            label: '# of Votes',
+            data: [{% for data in bc.one %} '{{ data.tt }}', {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+</div>
+
+{% endblock content %}

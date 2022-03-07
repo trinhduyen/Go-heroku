@@ -1,0 +1,35 @@
+{% if data %}
+    <div class="col-md-3"> </div>
+    <div class="col-md-6">
+        <div class="card-yellow">
+            <div class="card-header">
+                Danh sách xe và chi phí sửa chữa xe
+            </div>
+            <div class="card-body">
+            </div>        
+                <div  style="overflow-x: auto;">
+                    <table class='table table-striped'>
+                        <thead>
+                            <th>Tên xe</th>
+                            <th>Biển số xe</th>
+                            <th>Tổng chi phí</th>
+                        </thead>
+                        <tbody>
+                            {% for item in data  %}
+                            <tr>
+
+                                <td>{{item.TenXe}}</td>
+                                <td>{{item.BienSoXe}}</td>
+                               
+                                <td>{{item.sum}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                       
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}

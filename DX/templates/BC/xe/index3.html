@@ -1,0 +1,45 @@
+{% extends 'BC/xe/index.html' %}
+{% block content2 %}
+
+  <div class="card">
+    <div class="card-header">
+      <div class="fomr-group">
+        <form action="">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-2"></div>
+            
+            <div class="col-md-3">
+             Nhập tháng:
+             
+              <input type="text" class='form-control' placeholder='Nhập tháng' name ='month'>
+            </div>
+      
+            <div class="col-md-3">
+              Loại phương tiện:
+              <select  class="form-control" name ="nhomxevt"  >
+                <option value='all'  selected>All</option>
+                {% for item in loaipt %}
+                <option value= "{{item.id}}" >{{item.Tennhomxe}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-2"><br>
+              <button class='btn btn-outline-success' type='submit' hx-post='{% url 'searchVTMonth' %}' hx-target='#VTMONTH' >search</button>
+            </div>
+            <div class="col-md-2" id ="aa">
+            </div>
+            
+          </div>
+        </form>
+      </div>
+     
+    
+    </div>
+  </div>
+  <div class="row" id ='VTMONTH'>
+   {% include 'include/bcxe/cpxe_month.html' %}
+  </div>
+
+
+  {% endblock content2 %}
